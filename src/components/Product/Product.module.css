@@ -1,0 +1,76 @@
+.btn-exit {
+    border: none;
+    background: transparent;
+}
+div {
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+.btn-exit img {
+    width: 29px;
+}
+.cart-icon {
+    width: 20px;
+}
+.btn-to-cart {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    justify-content: center;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+.head {
+    display: flex;
+    max-width: 900px;
+    justify-content: space-between;
+}
+.rating img{
+width: 15px;
+}
+.ul li{
+    display: flex;
+    flex-direction: column;
+}
+.body {
+    margin-top: 50px;
+    display: flex;
+    gap: 40px;
+}
+.info {
+    width: 280px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 30px;
+}
+.info div{
+    font-size: 18px;
+}
+.pizza-img{ 
+    width: 450px;    
+    height: 285px;
+}
+.rating {
+    display: flex;
+    justify-content: space-between;
+}
+.price {
+    display: flex;
+    justify-content: space-between;
+}
+.rating-numbers {
+    font-size: 15px;
+    background-color: var(--white-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 20px;
+
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    border-radius: 15px;
+}

@@ -1,0 +1,18 @@
+.succes {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+    gap: 30px;
+}
+img {
+    width: 420px;
+    border-radius: 20px
+}
+.text {
+    color: var(--text-color);
+    font-size: 31px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 120%;
+}
