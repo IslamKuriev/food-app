@@ -23,7 +23,7 @@ export type RegisterForm = {
 
 const Register = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
   const { jwt, registerErrorMessage } = useSelector((s: RootState) => s.user);
 
   useEffect(() => {

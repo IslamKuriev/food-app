@@ -1,112 +1,126 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { loadState } from "./storage";
-import { LoginResponse } from "../interfaces/auth.interface";
-import { PREFIX } from "../helpers/API";
-import axios, { AxiosError } from "axios";
-import { Profile } from "../interfaces/user.interface";
-import { RootState } from "./store";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { loadState } from './storage';
+import { LoginResponse } from '../interfaces/auth.interface';
+import { PREFIX } from '../helpers/API';
+import axios, { AxiosError } from 'axios';
+import { Profile } from '../interfaces/user.interface';
+import { RootState } from './store';
 
-export const JWT_PERSISTENS_STATE = "userData"
+export const JWT_PERSISTENS_STATE = 'userData';
 
 export interface UserPersistenState {
-    jwt: string | null
+  jwt: string | null;
 }
- 
+
 export interface UserState {
-   jwt: string | null
-   loginErrorMessage?: string 
-   registerErrorMessage?: string
-   profile?: Profile
+  jwt: string | null;
+  loginErrorMessage?: string;
+  registerErrorMessage?: string;
+  profile?: Profile;
 }
- 
+
 const initialState: UserState = {
-     jwt: loadState<UserPersistenState>(JWT_PERSISTENS_STATE)?.jwt ?? null,
-}
+  jwt: loadState<UserPersistenState>(JWT_PERSISTENS_STATE)?.jwt ?? null,
+};
 
-export const login = createAsyncThunk("user/login",
-    async(params: {email: string, password: string}) => {
-        try {
-        const { data } = await axios.post<LoginResponse>(`${PREFIX}/auth/login`, {
-        email: params.email,
-        password: params.password,
-        });
-        return data
-        } catch (e) {
-            if(e instanceof AxiosError) {
-            throw new Error(e.response?.data.message)
-            }
-        }
+export const login = createAsyncThunk<
+  LoginResponse,
+  { email: string; password: string },
+  { rejectValue: string }
+>('user/login', async (params, { rejectWithValue }) => {
+  try {
+    const { data } = await axios.post<LoginResponse>(`${PREFIX}/auth/login`, {
+      email: params.email,
+      password: params.password,
+    });
+    return data;
+  } catch (e) {
+    if (e instanceof AxiosError) {
+      return rejectWithValue(e.response?.data.message || 'Unknown error');
     }
-)
-
-export const register = createAsyncThunk("user/register",
-    async(params: {email: string, password: string, name: string}) => {
-        try {
-        const { data } = await axios.post<LoginResponse>(`${PREFIX}/auth/register`, {
-        email: params.email,
-        password: params.password,
-        name: params.name
-        });
-        return data
-        } catch (e) {
-            if(e instanceof AxiosError) {
-            throw new Error(e.response?.data.message)
-            }
-        }
-    }
-)
-
-export const getProfile = createAsyncThunk<Profile, void, { state: RootState }>("user/getProfile",
-    async(_, thunkApi) => {
-        const jwt = thunkApi.getState().user.jwt
-        const { data } = await axios.get<Profile>(`${PREFIX}/user/profile `, {
-           headers: {
-            Authorization: `Bearer ${jwt}`
-           }
-        });
-        return data
+    throw e;
   }
-);
+});
+
+export const register = createAsyncThunk<
+  LoginResponse,
+  { email: string; password: string; name: string },
+  { rejectValue: string }
+>('user/register', async (params, { rejectWithValue }) => {
+  try {
+    const { data } = await axios.post<LoginResponse>(`${PREFIX}/auth/register`, {
+      email: params.email,
+      password: params.password,
+      name: params.name,
+    });
+    return data;
+  } catch (e) {
+    if (e instanceof AxiosError) {
+      return rejectWithValue(e.response?.data.message || 'Unknown error');
+    }
+    throw e;
+  }
+});
+
+export const getProfile = createAsyncThunk<
+  Profile,
+  void,
+  { state: RootState; rejectValue: string }
+>('user/getProfile', async (_, thunkApi) => {
+  try {
+    const jwt = thunkApi.getState().user.jwt;
+    const { data } = await axios.get<Profile>(`${PREFIX}/user/profile`, {
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+      },
+    });
+    return data;
+  } catch (e) {
+    if (e instanceof AxiosError) {
+      return thunkApi.rejectWithValue(e.response?.data.message || 'Failed to fetch profile');
+    }
+    throw e;
+  }
+});
 
 export const userSlice = createSlice({
-    name: "user",
-    initialState,
-    reducers: {
+  name: 'user',
+  initialState,
+  reducers: {
     logout: (state) => {
-        state.jwt = null
+      state.jwt = null;
     },
     clearError: (state) => {
-        state.loginErrorMessage = undefined
+      state.loginErrorMessage = undefined;
     },
     clearRegisterError: (state) => {
-        state.registerErrorMessage = undefined
-    }
+      state.registerErrorMessage = undefined;
     },
-    extraReducers: (builder) => {
-        builder.addCase(login.fulfilled, (state, action) => {
-            if(!action.payload) {
-                return;
-            }
-             state.jwt = action.payload.access_token
-        }),
-        builder.addCase(login.rejected, (state, action) => {
-          state.loginErrorMessage = action.error.message
-       }),
-       builder.addCase(getProfile.fulfilled, (state, action) => {
-          state.profile = action.payload
+  },
+  extraReducers: (builder) => {
+    builder.addCase(login.fulfilled, (state, action) => {
+      if (!action.payload) {
+        return;
+      }
+      state.jwt = action.payload.access_token;
     }),
-    builder.addCase(register.fulfilled, (state, action) => {
-        if(!action.payload) {
-            return;
+      builder.addCase(login.rejected, (state, action) => {
+        state.loginErrorMessage = action.error.message;
+      }),
+      builder.addCase(getProfile.fulfilled, (state, action) => {
+        state.profile = action.payload;
+      }),
+      builder.addCase(register.fulfilled, (state, action) => {
+        if (!action.payload) {
+          return;
         }
-         state.jwt = action.payload.access_token
-    }),
-    builder.addCase(register.rejected, (state, action) => {
-      state.registerErrorMessage = action.error.message
-   })                      
-  } 
-})
+        state.jwt = action.payload.access_token;
+      }),
+      builder.addCase(register.rejected, (state, action) => {
+        state.registerErrorMessage = action.error.message;
+      });
+  },
+});
 
-
-export default userSlice.reducer
-export const userActions = userSlice.actions
+export default userSlice.reducer;
+export const userActions = userSlice.actions;

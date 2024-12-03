@@ -1,11 +1,11 @@
-import { ChangeEvent, useEffect, useState } from "react";
-import { Headling } from "../../components/Headling/Headling";
-import { Search } from "../../components/Search/Search";
-import { PREFIX } from "../../helpers/API";
-import { Product } from "../../interfaces/product.interface";
-import styles from "./Menu.module.css";
-import axios, { AxiosError } from "axios";
-import { MenuList } from "./MenuList/MenuList";
+import { ChangeEvent, useEffect, useState } from 'react';
+import { Headling } from '../../components/Headling/Headling';
+import { Search } from '../../components/Search/Search';
+import { PREFIX } from '../../helpers/API';
+import { Product } from '../../interfaces/product.interface';
+import styles from './Menu.module.css';
+import axios, { AxiosError } from 'axios';
+import { MenuList } from './MenuList/MenuList';
 
 const Menu = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -27,7 +27,7 @@ const Menu = () => {
       setProducts(data);
       setIsLoading(false);
     } catch (e) {
-      console.error(e, "error");
+      console.error(e, 'error');
       if (e instanceof AxiosError) {
         setError(e.message);
       }
@@ -41,20 +41,15 @@ const Menu = () => {
   };
   return (
     <>
-      <div className={styles["head"]}>
+      <div className={styles['head']}>
         <Headling>Menu</Headling>
-        <Search
-          placeholder="Введите блюдо или состав"
-          onChange={updateFilter}
-        />
+        <Search placeholder="Введите блюдо или состав" onChange={updateFilter} />
       </div>
       <div>
         {error && <>{error}</>}
         {!isLoading && products.length > 0 && <MenuList products={products} />}
         {isLoading && <>Загружаем продукты</>}
-        {!isLoading && products.length === 0 && (
-          <>Не найдено блюдо по зарпосу</>
-        )}
+        {!isLoading && products.length === 0 && <>Не найдено блюдо по зарпосу</>}
       </div>
     </>
   );

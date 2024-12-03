@@ -1,15 +1,15 @@
-import { useDispatch, useSelector } from "react-redux";
-import { Headling } from "../../components/Headling/Headling";
-import { AppDispatch, RootState } from "../../store/store";
-import CartItems from "../../components/CartItem/CartItem";
-import { useEffect, useState } from "react";
-import { Product } from "../../interfaces/product.interface";
-import axios from "axios";
-import { PREFIX } from "../../helpers/API";
-import styles from "./Cart.module.css";
-import Button from "../../components/Button/Button";
-import { useNavigate } from "react-router-dom";
-import { cartActions } from "../../store/cart.slice";
+import { useDispatch, useSelector } from 'react-redux';
+import { Headling } from '../../components/Headling/Headling';
+import { AppDispatch, RootState } from '../../store/store';
+import CartItems from '../../components/CartItem/CartItem';
+import { useEffect, useState } from 'react';
+import { Product } from '../../interfaces/product.interface';
+import axios from 'axios';
+import { PREFIX } from '../../helpers/API';
+import styles from './Cart.module.css';
+import Button from '../../components/Button/Button';
+import { useNavigate } from 'react-router-dom';
+import { cartActions } from '../../store/cart.slice';
 
 const DELEVERY_FEE = 169;
 
@@ -49,17 +49,17 @@ const Cart = () => {
         headers: {
           Authorization: `Bearer ${jwt}`,
         },
-      }
+      },
     );
     dispatch(cartActions.clean());
-    navigate("/succes");
+    navigate('/succes');
   };
   useEffect(() => {
     loadAllItems();
   }, [items]);
   return (
     <>
-      <Headling className={styles["headling"]}>Корзина</Headling>
+      <Headling className={styles['headling']}>Корзина</Headling>
       {items.map((i) => {
         const product = cartProduct.find((p) => p.id === i.id);
         if (!product) {
@@ -67,34 +67,30 @@ const Cart = () => {
         }
         return <CartItems key={product.id} count={i.count} {...product} />;
       })}
-      <div className={styles["line"]}>
-        <div className={styles["text"]}>Итог</div>
-        <div className={styles["price"]}>
+      <div className={styles['line']}>
+        <div className={styles['text']}>Итог</div>
+        <div className={styles['price']}>
           {total}&nbsp;<span>₽</span>
         </div>
       </div>
-      <hr className={styles["hr"]} />
-      <div className={styles["line"]}>
-        <div className={styles["text"]}>Доставка</div>
-        <div className={styles["price"]}>
+      <hr className={styles['hr']} />
+      <div className={styles['line']}>
+        <div className={styles['text']}>Доставка</div>
+        <div className={styles['price']}>
           {DELEVERY_FEE}&nbsp;<span>₽</span>
         </div>
       </div>
-      <hr className={styles["hr"]} />
-      <div className={styles["line"]}>
-        <div className={styles["text"]}>
-          Итого <span className={styles["total-count"]}>({items.length})</span>
+      <hr className={styles['hr']} />
+      <div className={styles['line']}>
+        <div className={styles['text']}>
+          Итого <span className={styles['total-count']}>({items.length})</span>
         </div>
-        <div className={styles["price"]}>
+        <div className={styles['price']}>
           {total + DELEVERY_FEE}&nbsp;<span>₽</span>
         </div>
       </div>
-      <div className={styles["checkout"]}>
-        <Button
-          onClick={checkout}
-          disabled={items.length === 0}
-          appearence="big"
-        >
+      <div className={styles['checkout']}>
+        <Button onClick={checkout} disabled={items.length === 0} appearence="big">
           Оформить
         </Button>
       </div>
