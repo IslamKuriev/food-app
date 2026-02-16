@@ -50,9 +50,9 @@ div {
 .info div {
   font-size: 18px;
 }
-.pizza-img {
-  width: 450px;
-  height: 285px;
+.product-img  {
+  width: 445px;
+  height: 280px;
 }
 .rating {
   display: flex;
@@ -70,7 +70,6 @@ div {
   justify-content: center;
   width: 50px;
   height: 20px;
-
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   border-radius: 15px;
 }

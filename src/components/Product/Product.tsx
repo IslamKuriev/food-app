@@ -1,17 +1,24 @@
-import { Await, useLoaderData, useNavigate } from 'react-router-dom';
+import { Await, useLoaderData, useNavigate, useParams } from 'react-router-dom';
 import { Product } from '../../interfaces/product.interface';
 import { Suspense } from 'react';
 import styles from './Product.module.css';
 import { Headling } from '../Headling/Headling';
 import Button from '../Button/Button';
+import { useDispatch } from 'react-redux';
+import { cartActions } from '../../store/cart.slice';
 const ProductComponent = () => {
   const data = useLoaderData() as { data: Product };
+  const dispatch = useDispatch()
   const navigate = useNavigate();
+  const { id } = useParams()
+  const numberId = Number(id)
 
   const exitProduct = () => {
     navigate('/');
   };
+
   const addToCart = () => {
+    dispatch(cartActions.add(numberId))
     navigate('/cart');
   };
   return (
@@ -32,7 +39,7 @@ const ProductComponent = () => {
               </div>
               <div className={styles['body']}>
                 <div>
-                  <img className={styles['pizza-img']} src={data.image} alt="Пицца" />
+                  <img className={styles['product-img']} src={data.image} alt="Еда" />
                 </div>
                 <div className={styles['info']}>
                   <div className={styles['price']}>

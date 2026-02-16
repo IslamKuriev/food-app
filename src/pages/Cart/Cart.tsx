@@ -36,9 +36,13 @@ const Cart = () => {
   };
 
   const loadAllItems = async () => {
+    console.log(items)
+
     const res = await Promise.all(items.map((i) => getMenu(i.id)));
+    console.log(res, 'res')
     setCartProduct(res);
   };
+
   const checkout = async () => {
     await axios.post(
       `${PREFIX}/order`,
@@ -60,13 +64,14 @@ const Cart = () => {
   return (
     <>
       <Headling className={styles['headling']}>Корзина</Headling>
-      {items.map((i) => {
+
+      {items.length ? items.map((i) => {
         const product = cartProduct.find((p) => p.id === i.id);
         if (!product) {
           return;
         }
         return <CartItems key={product.id} count={i.count} {...product} />;
-      })}
+      }) : <p>Тут пусто.</p>}
       <div className={styles['line']}>
         <div className={styles['text']}>Итог</div>
         <div className={styles['price']}>
