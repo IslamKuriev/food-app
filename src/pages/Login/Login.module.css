@@ -3,7 +3,7 @@
   flex-direction: column;
   gap: 30px;
   width: 100%;
-  max-width: 500px;
+  max-width: 31.25rem;
 }
 .form {
   display: flex;

@@ -1,6 +1,6 @@
 .head {
     position: relative;
-    min-height: 170px;
+    min-height: 10.625rem;
     border-top-left-radius: 19px;
     border-top-right-radius: 19px;
     background-position: center center;
@@ -12,7 +12,8 @@
     background: white;
     border-radius: 19px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    width: 320px;
+    width: 100%;
+    max-width: 20rem;
     transition: transform 0.3s ease, 0.3s ease;
 }
 
@@ -25,11 +26,11 @@
 }
 
 .add-to-cart img {
-    width: 18px;
+    width: 1.125rem;
 }
 
 .rating img {
-    width: 12px;
+    width: 0.75rem;
 }
 
 .title {
@@ -87,8 +88,8 @@
     right: 15px;
     background: var(--primary-color);
     border-radius: 50%;
-    width: 34px;
-    height: 34px;
+    width: 2.125rem;
+    height: 2.125rem;
     border: none;
     z-index: 4;
 }
@@ -99,4 +100,20 @@
 
 .link {
     text-decoration: none;
+    width: 100%;
+    max-width: 20rem;
+}
+
+@media (min-width: 480px) {
+    .card,
+    .link {
+        max-width: 18.5rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .card,
+    .link {
+        max-width: 20rem;
+    }
 }

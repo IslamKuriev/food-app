@@ -8,14 +8,21 @@
   box-shadow: 15px 20px 45px 0px rgba(233, 233, 233 0.25);
   border-radius: 10px;
   padding: 16px 30px 16px 44px;
-  min-width: 200px;
+  width: 100%;
 }
 .input-wrapper {
   position: relative;
+  width: 100%;
 }
 .icon {
-  width: 20px;
+  width: 1.25rem;
   position: absolute;
   left: 16px;
   top: 16px;
+}
+
+@media (min-width: 480px) {
+  .input {
+    max-width: 18.75rem;
+  }
 }

@@ -2,8 +2,11 @@
   margin-bottom: 40px;
 }
 .line {
-  max-width: 512px;
+  width: 100%;
+  max-width: 32rem;
   display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
   justify-content: space-between;
   padding: 17px 0;
 }
@@ -11,7 +14,8 @@
   color: #9796a1;
 }
 .hr {
-  max-width: 512px;
+  width: 100%;
+  max-width: 32rem;
   margin: 0;
   border: 1px solid #f1f2f3;
 }
@@ -37,7 +41,8 @@
   line-height: normal;
 }
 .checkout {
-  max-width: 512px;
+  width: 100%;
+  max-width: 32rem;
   display: flex;
   align-items: center;
   justify-content: center;

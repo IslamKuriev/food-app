@@ -6,5 +6,6 @@
     border: 1px solid #EEE;
     box-shadow: 15px 20px 45px 0px rgba(233, 233, 233 0.25);
     border-radius: 10px;
-    padding: 20px;
+    padding: 1.25rem;
+    width: 100%;
 }

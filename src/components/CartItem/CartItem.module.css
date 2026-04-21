@@ -1,27 +1,31 @@
 .item {
   display: flex;
-  gap: 20px;
-  max-width: 512px;
-  margin-bottom: 27px;
+  flex-wrap: wrap;
+  gap: 1rem;
+  width: 100%;
+  max-width: 32rem;
+  margin-bottom: 1.25rem;
 }
 
 .image {
-  width: 82px;
-  height: 82px;
+  width: 5rem;
+  height: 5rem;
   background-size: cover;
   background-position: center center;
   filter: drop-shadow(0px 8px 25p rgba(224, 219, 196, 0.9));
   border-radius: 20px;
 }
 .actions {
-  margin-left: auto;
+  margin-left: 0;
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   align-items: center;
-  align-self: flex-start;
+  align-self: center;
+  width: 100%;
 }
 .actions img {
-  width: 15px;
+  width: 0.9375rem;
 }
 .description {
   display: flex;
@@ -49,8 +53,8 @@
   background: none;
   border: 1px solid var(--primary-color);
   border-radius: 50%;
-  width: 29px;
-  height: 29px;
+  width: 1.8125rem;
+  height: 1.8125rem;
 }
 .plus {
   display: flex;
@@ -59,8 +63,8 @@
   background: var(--primary-color);
   border: 1px solid var(--primary-color);
   border-radius: 50%;
-  width: 28px;
-  height: 28px;
+  width: 1.75rem;
+  height: 1.75rem;
 }
 .remove {
   display: flex;
@@ -68,8 +72,8 @@
   justify-content: center;
   border: none;
   background: none;
-  width: 28px;
-  height: 28px;
+  width: 1.75rem;
+  height: 1.75rem;
 }
 .number {
   color: var(--text-color);
@@ -77,4 +81,18 @@
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+}
+
+@media (min-width: 480px) {
+  .item {
+    flex-wrap: nowrap;
+    gap: 1.25rem;
+    margin-bottom: 1.6875rem;
+  }
+
+  .actions {
+    margin-left: auto;
+    width: auto;
+    align-self: flex-start;
+  }
 }

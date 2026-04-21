@@ -4,9 +4,12 @@
   justify-content: center;
   align-items: center;
   gap: 30px;
+  width: 100%;
+  padding-inline: 1rem;
 }
 img {
-  width: 420px;
+  width: 100%;
+  max-width: 26.25rem;
   border-radius: 20px;
 }
 .text {
@@ -15,4 +18,11 @@ img {
   font-style: normal;
   font-weight: 300;
   line-height: 120%;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .succes {
+    padding-inline: 0;
+  }
 }

@@ -53,7 +53,7 @@ const Layout = () => {
           </NavLink>
         </div>
         <Button className={styles['exit']} onClick={logout}>
-          <img src="/free.png" alt="Иконка выхода" /> Выйти
+          <img src="/free.png" alt="Иконка выхода" /> Выйти с аккаунта
         </Button>
       </div>
       <div className={styles['content']}>
